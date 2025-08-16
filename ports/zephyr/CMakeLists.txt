@@ -81,6 +81,7 @@ set(MICROPY_SOURCE_PORT
     zephyr_device.c
     zephyr_storage.c
     zephyr_filesystem.c
+    zephyr_display.c
     mpthreadport.c
     network_common.c
     network_wlan.c
