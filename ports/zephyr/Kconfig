@@ -83,6 +83,88 @@ choice MICROPY_CONFIG_ROM_LEVEL
 
 endchoice
 
+config MICROPY_DYNAMIC_DEVICE_INFOS
+	bool "Allow querying more informations about devices at runtime"
+	depends on DEVICE_DT_METADATA
+
+config MICROPY_DYNAMIC_PINCTRL
+	bool "Enable Dynamic Pins"
+	depends on PINCTRL_DYNAMIC
+	depends on DEVICE_DT_METADATA
+	imply DEVICE_DEINIT_SUPPORT
+
+if MICROPY_DYNAMIC_PINCTRL
+
+config MICROPY_DYNAMIC_PINCTRL_GENERATE_PINMUX
+	bool "Generate pinmux from dts header files"
+	default y
+
+config MICROPY_DYNAMIC_PINCTRL_CUSTOM_GENERATOR
+	bool "Enable Dynamic Pins with custom pinmux generator script"
+
+choice MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS
+	bool "Configure Pins previously used by a peripheral as GPIOs once they are disused"
+	default MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS_DIRECT
+
+	config MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS_NO
+		bool "Do not reset previously used pins"
+
+	config MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS_UPDATE
+		bool "Update the old pins via the update state"
+
+	config MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS_DIRECT
+		bool "Update the old pins with pinctrl_configure_pins"
+
+endchoice
+
+if MICROPY_DYNAMIC_PINCTRL_GENERATE_PINMUX
+
+if MICROPY_DYNAMIC_PINCTRL_CUSTOM_GENERATOR
+
+config MICROPY_DYNAMIC_PINCTRL_ARG
+	string "Custom argument for filtering by board"
+
+config MICROPY_DYNAMIC_PINCTRL_SCRIPT
+	string "Custom generator script"
+
+endif # MICROPY_DYNAMIC_PINCTRL_CUSTOM_GENERATOR
+
+if !MICROPY_DYNAMIC_PINCTRL_CUSTOM_GENERATOR
+
+config MICROPY_DYNAMIC_PINCTRL_REGEX
+	string "Regex to identify pinmux definitions"
+
+endif # !MICROPY_DYNAMIC_PINCTRL_CUSTOM_GENERATOR
+
+config MICROPY_DYNAMIC_PINCTRL_HEADER
+	string "Path to header containing pinmux definitions"
+
+endif # MICROPY_DYNAMIC_PINCTRL_GENERATE_PINMUX
+
+config MICROPY_DYNAMIC_PINCTRL_BUILDER_FILE
+	string "Path to file defining functions to build pinctrl structure"
+
+choice MICROPY_DYNAMIC_PINCTRL_PINMUX_TYPE
+	prompt "How to handle the DTS pinmux type"
+	default MICROPY_DYNAMIC_PINCTRL_PINMUX_TYPE_UINT32_T
+
+	config MICROPY_DYNAMIC_PINCTRL_PINMUX_TYPE_UINT32_T
+		bool "The DTS pinmux type is uint32_t"
+
+	config MICROPY_DYNAMIC_PINCTRL_PINMUX_TYPE_CUSTOM
+		bool "The DTS pinmux type is custom"
+
+endchoice
+
+if MICROPY_DYNAMIC_PINCTRL_PINMUX_TYPE_CUSTOM
+
+config MICROPY_DYNAMIC_PINCTRL_PINMUX_TYPE_FILE
+	string "File defining the pinmux type"
+
+endif # MICROPY_DYNAMIC_PINCTRL_PINMUX_TYPE_CUSTOM
+
+endif # MICROPY_DYNAMIC_PINCTRL
+
 endmenu # MicroPython Options
 
 source "Kconfig.zephyr"
