@@ -49,4 +49,8 @@ extern const mp_obj_type_t zephyr_display_type;
 extern const mp_obj_type_t zephyr_regulator_type;
 #endif
 
+#ifdef CONFIG_MPIPEIPE
+extern const mp_obj_module_t mp_module_zephyr_mpipe;
+#endif
+
 #endif // MICROPY_INCLUDED_ZEPHYR_MODZEPHYR_H

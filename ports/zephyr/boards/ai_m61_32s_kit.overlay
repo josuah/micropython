@@ -21,7 +21,7 @@
 
 	heap_psram {
 		compatible = "micropython,heap";
-		size = <DT_SIZE_M(4)>;
+		size = <DT_SIZE_M(2)>;
 		memory-region = <&psram>;
 	};
 };

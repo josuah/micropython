@@ -94,6 +94,8 @@ static const mp_rom_map_elem_t mp_module_time_globals_table[] = {
     #endif
     #ifdef CONFIG_REGULATOR
     { MP_ROM_QSTR(MP_QSTR_Regulator), MP_ROM_PTR(&zephyr_regulator_type) },
+    #ifdef CONFIG_MPIPE
+    { MP_ROM_QSTR(MP_QSTR_mpipe), MP_ROM_PTR(&mp_module_zephyr_mpipe) },
     #endif
 };
 
