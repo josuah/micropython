@@ -41,4 +41,8 @@ extern const mp_obj_type_t zephyr_flash_area_type;
 extern const mp_obj_type_t zephyr_filesystem_type;
 #endif
 
+#ifdef CONFIG_MP
+extern const mp_obj_module_t mp_module_zephyr_mediapipe;
+#endif
+
 #endif // MICROPY_INCLUDED_ZEPHYR_MODZEPHYR_H
