@@ -90,6 +90,9 @@ set(MICROPY_SOURCE_PORT
     modtls.c
     zephyr_device_api_kind.c
     zephyr_pinctrl.c
+    network_common.c
+    network_wlan.c
+    modnetwork.c
 )
 list(TRANSFORM MICROPY_SOURCE_PORT PREPEND ${MICROPY_PORT_DIR}/)
 
