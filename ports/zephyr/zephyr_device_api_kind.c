@@ -26,6 +26,8 @@
 
 #if defined(CONFIG_MICROPY_DYNAMIC_DEVICE_INFOS) || defined(CONFIG_MICROPY_DYNAMIC_PINCTRL)
 
+#include <zephyr/version.h>
+
 #include "zephyr_device.h"
 
 static const char *zephyr_api_kind_str[API_MAX] = {
@@ -33,21 +35,29 @@ static const char *zephyr_api_kind_str[API_MAX] = {
     [API_AUXDISPLAY] = "auxdisplay",
     [API_BBRAM] = "bbram",
     [API_BIOMETRIC] = "biometric",
+#if defined(CONFIG_BT)
     [API_BT_HCI] = "bt_hci",
+#endif
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_BUZZER] = "buzzer",
+#endif
     [API_CACHE] = "cache",
     [API_CAN] = "can",
     [API_CELLULAR] = "cellular",
     [API_CHARGER] = "charger",
     [API_CLOCK_CONTROL] = "clock_control",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_CLOCK_MONITOR] = "clock_monitor",
+#endif
     [API_COMPARATOR] = "comparator",
     [API_COREDUMP] = "coredump",
     [API_COUNTER] = "counter",
     [API_CRC] = "crc",
     [API_DAC] = "dac",
     [API_DAI] = "dai",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_DALI] = "dali",
+#endif
     [API_DISK] = "disk",
     [API_DISPLAY] = "display",
     [API_DMA] = "dma",
@@ -59,7 +69,9 @@ static const char *zephyr_api_kind_str[API_MAX] = {
     [API_EMUL_SENSOR] = "emul_sensor",
     [API_EMUL_STUB_DEVICE] = "emul_stub_device",
     [API_ENTROPY] = "entropy",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_EMUL_ESPI] = "emul_espi",
+#endif
     [API_ESPI] = "espi",
     [API_ESPI_SAF] = "espi_saf",
     [API_FLASH] = "flash",
@@ -67,7 +79,9 @@ static const char *zephyr_api_kind_str[API_MAX] = {
     [API_FUEL_GAUGE] = "fuel_gauge",
     [API_GNSS] = "gnss",
     [API_GPIO] = "gpio",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_HAPTICS] = "haptics",
+#endif
     [API_HWINFO] = "hwinfo",
     [API_HWSPINLOCK] = "hwspinlock",
     [API_I2C_EMUL] = "i2c_emul",
@@ -81,12 +95,18 @@ static const char *zephyr_api_kind_str[API_MAX] = {
     [API_LORA] = "lora",
     [API_MBOX] = "mbox",
     [API_MDIO] = "mdio",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_MEMC] = "memc",
+#endif
     [API_MIPI_DBI] = "mipi_dbi",
     [API_MIPI_DSI] = "mipi_dsi",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_EMUL_MSPI] = "emul_mspi",
+#endif
     [API_MSPI] = "mspi",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_MUX_CONTROL] = "mux_control",
+#endif
     [API_OPAMP] = "opamp",
     [API_OTP] = "otp",
     [API_PECI] = "peci",
@@ -94,7 +114,9 @@ static const char *zephyr_api_kind_str[API_MAX] = {
     [API_PM_CPU_OPS] = "pm_cpu_ops",
     [API_PS2] = "ps2",
     [API_PTP_CLOCK] = "ptp_clock",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_PULSE_IO] = "pulse_io",
+#endif
     [API_PWM] = "pwm",
     [API_REGULATOR] = "regulator",
     [API_RESET] = "reset",
@@ -111,7 +133,9 @@ static const char *zephyr_api_kind_str[API_MAX] = {
     [API_SWDP] = "swdp",
     [API_SYSCON] = "syscon",
     [API_TEE] = "tee",
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     [API_TGPIO] = "tgpio",
+#endif
     [API_UAOL] = "uaol",
     [API_UART_EMUL] = "uart_emul",
     [API_UART] = "uart",
@@ -127,21 +151,29 @@ static const char *zephyr_api_kind_str[API_MAX] = {
 #include <zephyr/drivers/auxdisplay.h>
 #include <zephyr/drivers/bbram.h>
 #include <zephyr/drivers/biometrics.h>
+#if defined(CONFIG_BT)
 #include <zephyr/drivers/bluetooth.h>
+#endif
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/buzzer.h>
+#endif
 #include <zephyr/drivers/cache.h>
 #include <zephyr/drivers/can.h>
 #include <zephyr/drivers/cellular.h>
 #include <zephyr/drivers/charger.h>
 #include <zephyr/drivers/clock_control.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/clock_monitor.h>
+#endif
 #include <zephyr/drivers/comparator.h>
 #include <zephyr/drivers/coredump.h>
 #include <zephyr/drivers/counter.h>
 #include <zephyr/drivers/crc.h>
 #include <zephyr/drivers/dac.h>
 #include <zephyr/drivers/dai.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/dali.h>
+#endif
 #include <zephyr/drivers/disk.h>
 #include <zephyr/drivers/display.h>
 #include <zephyr/drivers/dma.h>
@@ -153,14 +185,18 @@ static const char *zephyr_api_kind_str[API_MAX] = {
 #include <zephyr/drivers/emul_sensor.h>
 #include <zephyr/drivers/emul_stub_device.h>
 #include <zephyr/drivers/entropy.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/espi_emul.h>
+#endif
 #include <zephyr/drivers/espi.h>
 #include <zephyr/drivers/flash.h>
 #include <zephyr/drivers/fpga.h>
 #include <zephyr/drivers/fuel_gauge.h>
 #include <zephyr/drivers/gnss.h>
 #include <zephyr/drivers/gpio.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/haptics.h>
+#endif
 #include <zephyr/drivers/hwinfo.h>
 #include <zephyr/drivers/hwspinlock.h>
 #include <zephyr/drivers/i2c_emul.h>
@@ -174,12 +210,18 @@ static const char *zephyr_api_kind_str[API_MAX] = {
 #include <zephyr/drivers/lora.h>
 #include <zephyr/drivers/mbox.h>
 #include <zephyr/drivers/mdio.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/memc.h>
+#endif
 #include <zephyr/drivers/mipi_dbi.h>
 #include <zephyr/drivers/mipi_dsi.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/mspi_emul.h>
+#endif
 #include <zephyr/drivers/mspi.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/mux.h>
+#endif
 #include <zephyr/drivers/opamp.h>
 #include <zephyr/drivers/otp.h>
 #include <zephyr/drivers/peci.h>
@@ -187,7 +229,9 @@ static const char *zephyr_api_kind_str[API_MAX] = {
 #include <zephyr/drivers/pm_cpu_ops.h>
 #include <zephyr/drivers/ps2.h>
 #include <zephyr/drivers/ptp_clock.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/pulse_io.h>
+#endif
 #include <zephyr/drivers/pwm.h>
 #include <zephyr/drivers/regulator.h>
 #include <zephyr/drivers/reset.h>
@@ -204,7 +248,9 @@ static const char *zephyr_api_kind_str[API_MAX] = {
 #include <zephyr/drivers/swdp.h>
 #include <zephyr/drivers/syscon.h>
 #include <zephyr/drivers/tee.h>
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
 #include <zephyr/drivers/timeaware_gpio.h>
+#endif
 #include <zephyr/drivers/uaol.h>
 #include <zephyr/drivers/uart_emul.h>
 #include <zephyr/drivers/uart.h>
@@ -229,12 +275,16 @@ enum zephyr_api_kind device_get_api_kind(const struct device *dev) {
     if (DEVICE_API_IS(biometric, dev)) {
         return API_BIOMETRIC;
     }
+#if defined(CONFIG_BT)
     if (DEVICE_API_IS(bt_hci, dev)) {
         return API_BT_HCI;
     }
+#endif
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(buzzer, dev)) {
         return API_BUZZER;
     }
+#endif
     if (DEVICE_API_IS(can, dev)) {
         return API_CAN;
     }
@@ -247,9 +297,11 @@ enum zephyr_api_kind device_get_api_kind(const struct device *dev) {
     if (DEVICE_API_IS(clock_control, dev)) {
         return API_CLOCK_CONTROL;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(clock_monitor, dev)) {
         return API_CLOCK_MONITOR;
     }
+#endif
     if (DEVICE_API_IS(comparator, dev)) {
         return API_COMPARATOR;
     }
@@ -268,9 +320,11 @@ enum zephyr_api_kind device_get_api_kind(const struct device *dev) {
     if (DEVICE_API_IS(dai, dev)) {
         return API_DAI;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(dali, dev)) {
         return API_DALI;
     }
+#endif
     if (DEVICE_API_IS(display, dev)) {
         return API_DISPLAY;
     }
@@ -295,9 +349,11 @@ enum zephyr_api_kind device_get_api_kind(const struct device *dev) {
     if (DEVICE_API_IS(entropy, dev)) {
         return API_ENTROPY;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(emul_espi, dev)) {
         return API_EMUL_ESPI;
     }
+#endif
     if (DEVICE_API_IS(espi, dev)) {
         return API_ESPI;
     }
@@ -316,9 +372,11 @@ enum zephyr_api_kind device_get_api_kind(const struct device *dev) {
     if (DEVICE_API_IS(gpio, dev)) {
         return API_GPIO;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(haptics, dev)) {
         return API_HAPTICS;
     }
+#endif
     if (DEVICE_API_IS(hwspinlock, dev)) {
         return API_HWSPINLOCK;
     }
@@ -349,24 +407,30 @@ enum zephyr_api_kind device_get_api_kind(const struct device *dev) {
     if (DEVICE_API_IS(mdio, dev)) {
         return API_MDIO;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(memc, dev)) {
         return API_MEMC;
     }
+#endif
     if (DEVICE_API_IS(mipi_dbi, dev)) {
         return API_MIPI_DBI;
     }
     if (DEVICE_API_IS(mipi_dsi, dev)) {
         return API_MIPI_DSI;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(emul_mspi, dev)) {
         return API_EMUL_MSPI;
     }
+#endif
     if (DEVICE_API_IS(mspi, dev)) {
         return API_MSPI;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(mux_control, dev)) {
         return API_MUX_CONTROL;
     }
+#endif
     if (DEVICE_API_IS(opamp, dev)) {
         return API_OPAMP;
     }
@@ -382,9 +446,11 @@ enum zephyr_api_kind device_get_api_kind(const struct device *dev) {
     if (DEVICE_API_IS(ptp_clock, dev)) {
         return API_PTP_CLOCK;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(pulse_io, dev)) {
         return API_PULSE_IO;
     }
+#endif
     if (DEVICE_API_IS(pwm, dev)) {
         return API_PWM;
     }
@@ -418,9 +484,11 @@ enum zephyr_api_kind device_get_api_kind(const struct device *dev) {
     if (DEVICE_API_IS(tee, dev)) {
         return API_TEE;
     }
+#if KERNEL_VERSION_NUMBER >= ZEPHYR_VERSION(4, 4, 99)
     if (DEVICE_API_IS(tgpio, dev)) {
         return API_TGPIO;
     }
+#endif
     if (DEVICE_API_IS(uaol, dev)) {
         return API_UAOL;
     }

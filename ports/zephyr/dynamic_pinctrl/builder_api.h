@@ -49,7 +49,7 @@ typedef struct _dynamic_pinctrl_builder_api_t {
 	 * Settings the platform doesnt support may be ignored.
 	 */
 	pinctrl_soc_pin_t (*make_pinctrl)(const mp_obj_t pinmux, const bool pu, const bool pd, const bool schmitt, const bool out, const bool in, const uint32_t slew, const uint32_t in_drive);
-	#if defined(MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS_UPDATE) || defined(CONFIG_MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS_DIRECT)
+	#if defined(CONFIG_MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS_UPDATE) || defined(CONFIG_MICROPY_DYNAMIC_PINCTRL_GPIO_PREVIOUS_DIRECT)
 	/* Set values inside pinctrl so it can be applied to disable what it was previously used for */
 	pinctrl_soc_pin_t (*set_pinctrl_off)(const pinctrl_soc_pin_t pinctrl);
 	#endif
